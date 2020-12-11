@@ -13,6 +13,10 @@ namespace practiceArrays
         {
             //method that inputs an array
             // output : prints array
+            Console.Write($"[{ar[0]}");
+            for (int i = 1; i < ar.Length; i++)
+                Console.Write($", {ar[i]}");
+            Console.WriteLine("]");
 
         }
         static  int[] BuildArray (int howMany, int first =0, int last = 100)
@@ -63,13 +67,52 @@ namespace practiceArrays
             // returns how many values in the array were equal to the arrays index
             throw new NotImplementedException();
         }
+        static bool IsSymetric (int [] array)
+        {
+            bool symetric = true;
+            for (int i = 0; i < array.Length/2 && symetric;i++)
+            {
+                symetric = array[i] == array[array.Length - i - 1];
+            }
+            return symetric;
+        }
+        static void Reverse (int [] ar)
+        {
+            for (int i = 0; i < ar.Length / 2 ; i++)
+            {
+                int temp = ar[i];
+                ar[i] = ar[ar.Length - i - 1];
+                ar[ar.Length - i - 1] = temp;
+            } 
+        }
+        static double MaxDifference (double[] ar)
+        {
+            double d = ar[1] - ar[0];
+            for (int i = 1; i < ar.Length; i++)
+                if (ar[i + 1] - ar[i] > d)
+                    d = ar[i + 1] - ar[i];
+            return d;
+        }
+        static bool ThreeThreeThree (int [] ar)
+        {
+            if (ar.Length % 3 != 0)
+                return false;
+            int len = ar.Length / 3;
+            bool three = true;
+            for (int i = len; i < ar.Length && three; i++)
+                three = ar[i] == ar[i - len];
+            return three;
+        }
         static void Main(string[] args)
         {
             //Check what you wrote to see if it works
-            int[] m = BuildArray(14, 1, 30);
+            int[] m = BuildArray(8, 1, 30);
             Print(m);
-            Console.WriteLine (GetMax(m));
-            Console.WriteLine($"And it appears {CountMaxes(m)}");
+            Reverse(m);
+            Print(m);
+            //Console.WriteLine (GetMax(m));
+           
+            Console.ReadKey();
 
         }
     }
